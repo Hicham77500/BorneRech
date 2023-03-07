@@ -28,7 +28,7 @@ security:
         registration:
             pattern: ^/api/users
             stateless: true
-            methods : [POST,get]  # ... permet de ne laisser public que la method post
+            methods : [POST,get,PUT,DELETE]  # ... permet de ne laisser public que la method post
             
         api:
             pattern:   ^/api
@@ -37,5 +37,5 @@ security:
 
     access_control:
         - { path: ^/api/login, roles: PUBLIC_ACCESS }
-        - { path: ^/api/users, roles: IS_AUTHENTICATED_FULL,methods : [PUT,DELETE,PATCH] }
+        - { path: ^/api/users, roles: IS_AUTHENTICATED_FULL,methods : [PATCH] }
         - { path: ^/api/demo,  roles: IS_AUTHENTICATED_FULLY }

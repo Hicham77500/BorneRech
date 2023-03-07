@@ -54,47 +54,54 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $password = null;
 
     #[Assert\NotBlank(groups: ['user:create'])]
-    #[Groups(['user:create', 'user:update'])]
+    #[Groups(['user:read','user:create', 'user:update'])]
     private ?string $plainPassword = null;
 
+    
     #[ORM\Column(type: 'json')]
+    #[Groups(['user:read','user:create', 'user:update'])]
     private array $roles = [];
     
     
     #[Assert\NotBlank(groups: ['user:create'])]
-    #[Groups(['user:create', 'user:update'])]
+    #[Groups(['user:read','user:create', 'user:update'])]
     #[ORM\Column(length: 255)]
     private ?string $lastname = null;
 
     #[Assert\NotBlank(groups: ['user:create'])]
-    #[Groups(['user:create', 'user:update'])]
+    #[Groups(['user:read','user:create', 'user:update'])]
     #[ORM\Column(length: 255)]
     private ?string $firstname = null;
 
 #[Assert\NotBlank(groups: ['user:create'])]
-    #[Groups(['user:create', 'user:update'])]
+    #[Groups(['user:read','user:create', 'user:update'])]
     #[ORM\Column(length: 255)]
     private ?string $street = null;
 
     #[Assert\NotBlank(groups: ['user:create'])]
-    #[Groups(['user:create', 'user:update'])]
+    #[Groups(['user:read','user:create', 'user:update'])]
     #[ORM\Column(length: 255)]
     private ?string $postalcode = null;
 
     #[Assert\NotBlank(groups: ['user:create'])]
-    #[Groups(['user:create', 'user:update'])]
+    #[Groups(['user:read','user:create', 'user:update'])]
     #[ORM\Column(length: 255)]
     private ?string $city = null;
 
     #[Assert\NotBlank(groups: ['user:create'])]
-    #[Groups(['user:create', 'user:update'])]
+    #[Groups(['user:read','user:create', 'user:update'])]
     #[ORM\Column(length: 255)]
     private ?string $numtel = null;
 
     #[Assert\NotBlank(groups: ['user:create'])]
-    #[Groups(['user:create', 'user:update'])]
+    #[Groups(['user:read','user:create', 'user:update'])]
     #[ORM\Column(length: 255)]
     private ?string $carbrand = null;
+
+    #[Assert\NotBlank(groups: ['user:create'])]
+    #[Groups(['user:read','user:create', 'user:update'])]
+    #[ORM\Column(length: 255)]
+    private ?string $username = null;
 
     public function getId(): ?int
     {
@@ -155,7 +162,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function setRoles(array $roles): self
     {
-        $this->roles = $roles;
+        // if ($roles[0]) {
+         $this->roles = $roles;
+        //  return $this;
+        // }
+        // $this->roles = 'ROLE_USER';
+       
 
         return $this;
     }
@@ -259,6 +271,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setCarbrand(string $carbrand): self
     {
         $this->carbrand = $carbrand;
+
+        return $this;
+    }
+
+    public function getUsername(): ?string
+    {
+        return $this->username;
+    }
+
+    public function setUsername(string $username): self
+    {
+        $this->username = $username;
 
         return $this;
     }
