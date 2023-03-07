@@ -59,27 +59,42 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: 'json')]
     private array $roles = [];
-
+    
+    
+    #[Assert\NotBlank(groups: ['user:create'])]
+    #[Groups(['user:create', 'user:update'])]
     #[ORM\Column(length: 255)]
-    private ?string $lastName = null;
+    private ?string $lastname = null;
 
+    #[Assert\NotBlank(groups: ['user:create'])]
+    #[Groups(['user:create', 'user:update'])]
     #[ORM\Column(length: 255)]
-    private ?string $firstName = null;
+    private ?string $firstname = null;
 
+#[Assert\NotBlank(groups: ['user:create'])]
+    #[Groups(['user:create', 'user:update'])]
     #[ORM\Column(length: 255)]
     private ?string $street = null;
 
+    #[Assert\NotBlank(groups: ['user:create'])]
+    #[Groups(['user:create', 'user:update'])]
     #[ORM\Column(length: 255)]
-    private ?string $postalCode = null;
+    private ?string $postalcode = null;
 
+    #[Assert\NotBlank(groups: ['user:create'])]
+    #[Groups(['user:create', 'user:update'])]
     #[ORM\Column(length: 255)]
     private ?string $city = null;
 
+    #[Assert\NotBlank(groups: ['user:create'])]
+    #[Groups(['user:create', 'user:update'])]
     #[ORM\Column(length: 255)]
-    private ?string $numTel = null;
+    private ?string $numtel = null;
 
+    #[Assert\NotBlank(groups: ['user:create'])]
+    #[Groups(['user:create', 'user:update'])]
     #[ORM\Column(length: 255)]
-    private ?string $carBrand = null;
+    private ?string $carbrand = null;
 
     public function getId(): ?int
     {
@@ -164,26 +179,26 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->plainPassword = null;
     }
 
-    public function getLastName(): ?string
+    public function getLastname(): ?string
     {
-        return $this->lastName;
+        return $this->lastname;
     }
 
-    public function setLastName(string $lastName): self
+    public function setLastname(string $lastname): self
     {
-        $this->lastName = $lastName;
+        $this->lastname = $lastname;
 
         return $this;
     }
 
-    public function getFirstName(): ?string
+    public function getFirstname(): ?string
     {
-        return $this->firstName;
+        return $this->firstname;
     }
 
-    public function setFirstName(string $firstName): self
+    public function setFirstname(string $firstname): self
     {
-        $this->firstName = $firstName;
+        $this->firstname = $firstname;
 
         return $this;
     }
@@ -200,14 +215,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getPostalCode(): ?string
+    public function getPostalcode(): ?string
     {
-        return $this->postalCode;
+        return $this->postalcode;
     }
 
-    public function setPostalCode(string $postalCode): self
+    public function setPostalcode(string $postalcode): self
     {
-        $this->postalCode = $postalCode;
+        $this->postalcode = $postalcode;
 
         return $this;
     }
@@ -224,28 +239,27 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getNumTel(): ?string
+    public function getNumtel(): ?string
     {
-        return $this->numTel;
+        return $this->numtel;
     }
 
-    public function setNumTel(string $numTel): self
+    public function setNumtel(string $numtel): self
     {
-        $this->numTel = $numTel;
+        $this->numtel = $numtel;
 
         return $this;
     }
 
-    public function getCarBrand(): ?string
+    public function getCarbrand(): ?string
     {
-        return $this->carBrand;
+        return $this->carbrand;
     }
 
-    public function setCarBrand(string $carBrand): self
+    public function setCarbrand(string $carbrand): self
     {
-        $this->carBrand = $carBrand;
+        $this->carbrand = $carbrand;
 
         return $this;
     }
-    
 }
