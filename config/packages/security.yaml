@@ -12,6 +12,7 @@ security:
                 # the property to query by - e.g. email, username, etc
                 property: 'email'
 
+
                 # optional: if you're using multiple Doctrine entity
                 # managers, this option defines which one to use
                 #manager_name: 'customer'
@@ -22,20 +23,25 @@ security:
             pattern: ^/api/login
             stateless: true
             json_login:
+                username_path: email
+                password_path: password
                 check_path: /api/login_check
                 success_handler: lexik_jwt_authentication.handler.authentication_success
                 failure_handler: lexik_jwt_authentication.handler.authentication_failure
+
         registration:
             pattern: ^/api/users
             stateless: true
-            methods : [POST,get,PUT,DELETE]  # ... permet de ne laisser public que la method post
-            
+            methods : [POST,PUT,DELETE]  # ... permet de ne laisser public que la method post
+            jwt: ~
         api:
             pattern:   ^/api
             stateless: true
             jwt: ~
-
+            
     access_control:
         - { path: ^/api/login, roles: PUBLIC_ACCESS }
-        - { path: ^/api/users, roles: IS_AUTHENTICATED_FULL,methods : [PATCH] }
+        - { path: ^/api/users, roles: IS_AUTHENTICATED_FULL,methods : [PATCH,GET] }
         - { path: ^/api/demo,  roles: IS_AUTHENTICATED_FULLY }
+       
+        
